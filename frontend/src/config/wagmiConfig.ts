@@ -1,7 +1,23 @@
-import { getDefaultConfig } from '@rainbow-me/rainbowkit'
 import { http } from 'wagmi';
+import { phantomWallet } from '@rainbow-me/rainbowkit/wallets'
+import { connectorsForWallets, getDefaultWallets } from '@rainbow-me/rainbowkit'
+import { getDefaultConfig } from '@rainbow-me/rainbowkit'
+const { wallets } = getDefaultWallets()
+const appName = 'FHE Voting'
 const projectId = '953b8aabd42f299570ac0cb2509db530'
-
+const connectors = connectorsForWallets(
+  [
+    ...wallets,
+    {
+      groupName: 'Popular',
+      wallets: [phantomWallet],
+    },
+  ],
+  {
+    appName,
+    projectId,
+  },
+)
 import type { Chain } from 'viem'
 
 const fhenix = {
@@ -13,6 +29,20 @@ const fhenix = {
   },
   blockExplorers: {
     default: { name: 'Explorer', url: 'https://explorer.helium.fhenix.zone' },
+  },
+  contracts: {
+      ensRegistry: {
+        address: '0x0',
+    },
+    ensUniversalResolver: {
+      address: '0x0',
+      blockCreated: 16773775,
+    },
+    multicall3: {
+      // not supported?
+      address: '0x',
+      blockCreated: 8123891232939923,
+    },
   },
 } as const satisfies Chain
 
@@ -27,6 +57,7 @@ export const wagmiConfig = getDefaultConfig({
   });
 
 // testnet
+// export const votingAddress = '0x7304b70c714083F6133bd223792DFfCE6832caA1'
 export const votingAddress = '0xd67b7Ca1165D77a6b767693C60dd432657352011'
 
 // localhost
