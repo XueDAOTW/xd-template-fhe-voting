@@ -81,6 +81,7 @@ contract Voting is Permissioned {
     function getUserVote(
         Permission memory signature
     ) public view onlyPermitted(signature, msg.sender) returns (bytes memory) {
+    // ) public view onlyPermitted(signature, msg.sender) returns (string memory) {   // for remix compiling
         require(FHE.isInitialized(_votes[msg.sender]), "no vote found!");
         return FHE.sealoutput(_votes[msg.sender], signature.publicKey);
     }
