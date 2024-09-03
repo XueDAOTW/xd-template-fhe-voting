@@ -7,11 +7,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "lint": "yarn biome check src --apply",
-    "lintCheck": "yarn biome check src",
-    "format": "yarn biome format src --write",
-    "preinstall": "npx only-allow yarn"
+    "start": "next start"
   },
   "dependencies": {
     "@biomejs/biome": "^1.7.0",
